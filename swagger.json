@@ -1,0 +1,160 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentation for coffee shop's Product API. This is a trial for\ncompleting a microservice using GoLang.",
+    "title": "Product API",
+    "contact": {
+      "name": "Dom Wakeling",
+      "url": "http://domwakeling.com",
+      "email": "info@domwakeling.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    },
+    "version": "0.1.0"
+  },
+  "basePath": "/",
+  "paths": {
+    "/products": {
+      "get": {
+        "description": "Returns a list of all products in the database.",
+        "tags": [
+          "products"
+        ],
+        "summary": "List all products",
+        "operationId": "listProducts",
+        "responses": {
+          "200": {
+            "$ref": "#/responses/productsResponse"
+          }
+        }
+      },
+      "post": {
+        "description": "Adds a product to the database.",
+        "tags": [
+          "products"
+        ],
+        "summary": "Add a product",
+        "operationId": "addProduct",
+        "responses": {
+          "204": {
+            "$ref": "#/responses/noContent"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "delete": {
+        "description": "Deletes a product from the databsae based on id.",
+        "tags": [
+          "products"
+        ],
+        "summary": "Delete product for a given id.",
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "ID",
+            "description": "The id of the product to delete from the database",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/responses/noContent"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          },
+          "500": {
+            "$ref": "#/responses/internalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "description": "Product is the struct definition for our API",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "x-go-name": "Description"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ID"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "price": {
+          "type": "number",
+          "format": "float",
+          "x-go-name": "Price"
+        },
+        "sku": {
+          "type": "string",
+          "x-go-name": "SKU"
+        }
+      },
+      "x-go-package": "_/home/pi/go/serve1/data"
+    },
+    "ValidationError": {
+      "description": "ValidationError is a collection of validation error messsages",
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Messages"
+        }
+      },
+      "x-go-package": "_/home/pi/go/serve1/handlers"
+    }
+  },
+  "responses": {
+    "errorValidation": {
+      "description": "Validation errors defined as an array of string",
+      "schema": {
+        "$ref": "#/definitions/ValidationError"
+      }
+    },
+    "internalServerError": {
+      "description": "Internal server error"
+    },
+    "noContent": {
+      "description": "No content is returned by this API endpoiint"
+    },
+    "notFound": {
+      "description": "Not found (id not present in database)"
+    },
+    "productsResponse": {
+      "description": "A list of products",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Product"
+        }
+      }
+    }
+  }
+}
