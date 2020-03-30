@@ -1,4 +1,4 @@
-module example.com/dwake/serve1
+module github.com/domwakeling/go_server
 
 require (
 	github.com/go-openapi/runtime v0.19.14 // indirect

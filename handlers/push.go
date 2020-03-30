@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"example.com/dwake/serve1/data"
+	"github.com/domwakeling/go_server/data"
 )
 
 // UpdateProduct is a Handler that receives an id (through mux) and data (in the Request.Body) and updated that id in the db

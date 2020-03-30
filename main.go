@@ -10,8 +10,8 @@ import (
 	"os/signal"
 	"time"
 
-	"example.com/dwake/serve1/handlers"
-	"example.com/dwake/serve1/data"
+	"github.com/domwakeling/go_server/handlers"
+	"github.com/domwakeling/go_server/data"
 )
 
 func main() {

@@ -21,7 +21,7 @@ package handlers
 import (
 	"log"
 
-	"example.com/dwake/serve1/data"
+	"github.com/domwakeling/go_server/data"
 )
 
 // Products is a Handler

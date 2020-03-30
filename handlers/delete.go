@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"example.com/dwake/serve1/data"
+	"github.com/domwakeling/go_server/data"
 )
 
 /*

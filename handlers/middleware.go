@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"example.com/dwake/serve1/data"
+	"github.com/domwakeling/go_server/data"
 )
 
 // MiddlewareProductValidation is a middleware to validate the product (as JSON) and add to Request context

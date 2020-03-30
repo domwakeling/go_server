@@ -1,6 +1,6 @@
 package handlers
 
-import "example.com/dwake/serve1/data"
+import "github.com/domwakeling/go_server/data"
 
 // Following wrappers exist only for purposes of generating swagger documentation
 
