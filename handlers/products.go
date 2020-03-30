@@ -1,21 +1,3 @@
-/*
-Package classification Product API
-
-Documentation for coffee shop's Product API. This is a trial for
-completing a microservice using GoLang.
-
-Schemes: http
-BasePath: /
-Version: 0.1.0
-License: MIT http://opensource.org/licenses/MIT
-Contact: Dom Wakeling<info@domwakeling.com> http://domwakeling.com
-
-Consumes:
-- application/json
-Produces:
-- application/json
-swagger:meta
-*/
 package handlers
 
 import (

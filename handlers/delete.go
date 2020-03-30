@@ -9,7 +9,7 @@ import (
 )
 
 /*
-swagger:route DELETE /products/{id} products deleteProduct
+tempcode:route DELETE /products/{id} products deleteProduct
 Delete product for a given id.
 
 Deletes a product from the databsae based on id.

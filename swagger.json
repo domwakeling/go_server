@@ -52,38 +52,6 @@
           }
         }
       }
-    },
-    "/products/{id}": {
-      "delete": {
-        "description": "Deletes a product from the databsae based on id.",
-        "tags": [
-          "products"
-        ],
-        "summary": "Delete product for a given id.",
-        "operationId": "deleteProduct",
-        "parameters": [
-          {
-            "type": "integer",
-            "format": "int64",
-            "x-go-name": "ID",
-            "description": "The id of the product to delete from the database",
-            "name": "id",
-            "in": "path",
-            "required": true
-          }
-        ],
-        "responses": {
-          "204": {
-            "$ref": "#/responses/noContent"
-          },
-          "404": {
-            "$ref": "#/responses/notFound"
-          },
-          "500": {
-            "$ref": "#/responses/internalServerError"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -114,46 +82,25 @@
           "x-go-name": "SKU"
         }
       },
-      "x-go-package": "_/home/pi/go/serve1/data"
+      "x-go-package": "github.com/domwakeling/go_server/data"
     },
-    "ValidationError": {
-      "description": "ValidationError is a collection of validation error messsages",
-      "type": "object",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-go-name": "Messages"
-        }
+    "Products": {
+      "description": "Products is a slice of Product",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Product"
       },
-      "x-go-package": "_/home/pi/go/serve1/handlers"
+      "x-go-package": "github.com/domwakeling/go_server/data"
     }
   },
   "responses": {
-    "errorValidation": {
-      "description": "Validation errors defined as an array of string",
-      "schema": {
-        "$ref": "#/definitions/ValidationError"
-      }
-    },
-    "internalServerError": {
-      "description": "Internal server error"
-    },
     "noContent": {
       "description": "No content is returned by this API endpoiint"
-    },
-    "notFound": {
-      "description": "Not found (id not present in database)"
     },
     "productsResponse": {
       "description": "A list of products",
       "schema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Product"
-        }
+        "$ref": "#/definitions/Products"
       }
     }
   }

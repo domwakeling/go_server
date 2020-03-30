@@ -1,15 +1,31 @@
+/*
+Package classification Product API
+
+Documentation for coffee shop's Product API. This is a trial for
+completing a microservice using GoLang.
+
+Schemes: http
+BasePath: /
+Version: 0.1.0
+License: MIT http://opensource.org/licenses/MIT
+Contact: Dom Wakeling<info@domwakeling.com> http://domwakeling.com
+
+Consumes:
+- application/json
+Produces:
+- application/json
+swagger:meta
+*/
 package handlers
 
 import "github.com/domwakeling/go_server/data"
-
-// Following wrappers exist only for purposes of generating swagger documentation
 
 // A list of products
 // swagger:response productsResponse
 type productsResponseWrapper struct {
 	// All products in the system.
-	// In: body
-	Body []data.Product
+	// in:body
+	Body data.Products	
 }
 
 // No content is returned by this API endpoiint
@@ -18,12 +34,12 @@ type productsNoContentWrapper struct {
 }
 
 // Not found (id not present in database)
-// swagger:response notFound
+// tempcode:response notFound
 type productsNotFoundWrapper struct {
 }
 
 // Validation errors defined as an array of string
-// swagger:response errorValidation
+// tempcode:response errorValidation
 type errorValidationWrapper struct {
 	// Collection of the errors
 	// in: body
@@ -31,11 +47,11 @@ type errorValidationWrapper struct {
 }
 
 // Internal server error
-// swagger:response internalServerError
+// tempcode:response internalServerError
 type internalErrorWrapper struct {
 }
 
-// swagger:parameters deleteProduct
+// tempcode:parameters deleteProduct
 type productIDParameterWrapper struct {
 	// The id of the product to which the operation relates
 	// in: path
