@@ -27,9 +27,9 @@ func GetProducts() Products {
 }
 
 // AddProduct aads a new Product to the store, generating new ID along the way
-func AddProduct(p Product) {
+func AddProduct(p *Product) {
 	p.ID = getNextID()
-	productList = append(productList, &p)
+	productList = append(productList, p)
 }
 
 // UpdateProduct updates an existing product in the store
@@ -54,7 +54,7 @@ func DeleteProduct(id int) error {
 		return err
 	}
 
-	productList = append(productList[:pos], productList[pos+1])
+	productList = append(productList[:pos], productList[pos+1:]...)
 	return nil
 }
 

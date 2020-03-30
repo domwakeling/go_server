@@ -21,7 +21,7 @@ func (p *Products) AddProduct(rw http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle POST Product")
 
 	// the product to add has been added to request context by middleware; get it out and cast (type assertion)
-	prod := r.Context().Value(KeyProduct{}).(data.Product)
+	prod := r.Context().Value(KeyProduct{}).(*data.Product)
 	p.l.Printf("[DEBUG] Inesrting product: %#v\n", prod)
 	data.AddProduct(prod)
 

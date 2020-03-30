@@ -20,10 +20,10 @@ func (p *Products) UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 	p.l.Println("Handle PUT Product on id", id)
 
 	// the product to update has been added to request context by middleware; get it out and cast (type assertion)
-	prod := r.Context().Value(KeyProduct{}).(data.Product)
+	prod := r.Context().Value(KeyProduct{}).(*data.Product)
 
 	// update the db
-	err = data.UpdateProduct(id, &prod)
+	err = data.UpdateProduct(id, prod)
 	if err == data.ErrProductNotFound {
 		http.Error(rw, "Product not found", http.StatusNotFound)
 		return
