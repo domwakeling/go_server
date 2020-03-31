@@ -8,6 +8,19 @@ import (
 	"github.com/domwakeling/go_server/data"
 )
 
+/*
+swagger:route PUT /products/{id} products updateProduct
+Update a product
+
+Updates product {id} in the database. Will fail if {id} does not exist.
+
+Responses:
+204: noContentResponse
+400: genericErrorResponse
+422: validationErrorResponse
+500: genericErrorResponse
+*/
+
 // UpdateProduct is a Handler that receives an id (through mux) and data (in the Request.Body) and updated that id in the db
 func (p *Products) UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 	// get the id from mux and check that it's valid

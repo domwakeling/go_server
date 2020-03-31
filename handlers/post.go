@@ -13,7 +13,10 @@ Add a product
 Adds a product to the database.
 
 Responses:
-204: noContent
+204: noContentResponse
+400: genericErrorResponse
+422: validationErrorResponse
+500: genericErrorResponse
 */
 
 // AddProduct is a Handler that receives data (in the Request.Body) and stores in db

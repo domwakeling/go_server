@@ -46,39 +46,160 @@
         ],
         "summary": "Add a product",
         "operationId": "addProduct",
+        "parameters": [
+          {
+            "description": "Product data structure to Add or Update a product.\n\nNote: the {id} field is not required and will be ignored. New product\nwill have an {id} generated, updated product will use the {id} passed\nin the path.",
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
         "responses": {
           "204": {
-            "$ref": "#/responses/noContent"
+            "$ref": "#/responses/noContentResponse"
+          },
+          "400": {
+            "$ref": "#/responses/genericErrorResponse"
+          },
+          "422": {
+            "$ref": "#/responses/validationErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/genericErrorResponse"
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "put": {
+        "description": "Updates product {id} in the database. Will fail if {id} does not exist.",
+        "tags": [
+          "products"
+        ],
+        "summary": "Update a product",
+        "operationId": "updateProduct",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "ID",
+            "description": "The id of the product to which the operation relates",
+            "name": "id",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Product data structure to Add or Update a product.\n\nNote: the {id} field is not required and will be ignored. New product\nwill have an {id} generated, updated product will use the {id} passed\nin the path.",
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/responses/noContentResponse"
+          },
+          "400": {
+            "$ref": "#/responses/genericErrorResponse"
+          },
+          "422": {
+            "$ref": "#/responses/validationErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/genericErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a product from the database based on {id}.",
+        "tags": [
+          "products"
+        ],
+        "summary": "Delete product for a given {id}",
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "type": "integer",
+            "format": "int64",
+            "x-go-name": "ID",
+            "description": "The id of the product to which the operation relates",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "$ref": "#/responses/noContentResponse"
+          },
+          "404": {
+            "$ref": "#/responses/genericErrorResponse"
+          },
+          "500": {
+            "$ref": "#/responses/genericErrorResponse"
           }
         }
       }
     }
   },
   "definitions": {
-    "Product": {
-      "description": "Product is the struct definition for our API",
+    "GenericError": {
+      "description": "GenericError is a generic error message returned by a server",
       "type": "object",
       "properties": {
-        "description": {
+        "message": {
           "type": "string",
+          "x-go-name": "Message"
+        }
+      },
+      "x-go-package": "github.com/domwakeling/go_server/handlers"
+    },
+    "Product": {
+      "type": "object",
+      "title": "Product defines the structure for a product under this API.",
+      "required": [
+        "name",
+        "description",
+        "price",
+        "sku"
+      ],
+      "properties": {
+        "description": {
+          "description": "the description for this product",
+          "type": "string",
+          "maxLength": 1000,
           "x-go-name": "Description"
         },
         "id": {
+          "description": "the id for the product",
           "type": "integer",
           "format": "int64",
+          "minimum": 1,
           "x-go-name": "ID"
         },
         "name": {
+          "description": "the name for this product",
           "type": "string",
+          "maxLength": 255,
           "x-go-name": "Name"
         },
         "price": {
+          "description": "the price for the producct",
           "type": "number",
           "format": "float",
+          "minimum": 0.01,
           "x-go-name": "Price"
         },
         "sku": {
+          "description": "the SKU for the product",
           "type": "string",
+          "pattern": "[a-z]+-[a-z]+-[a-z]+",
           "x-go-name": "SKU"
         }
       },
@@ -91,16 +212,42 @@
         "$ref": "#/definitions/Product"
       },
       "x-go-package": "github.com/domwakeling/go_server/data"
+    },
+    "ValidationError": {
+      "description": "ValidationError is a collection of validation error messsages",
+      "type": "object",
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "Messages"
+        }
+      },
+      "x-go-package": "github.com/domwakeling/go_server/handlers"
     }
   },
   "responses": {
-    "noContent": {
-      "description": "No content is returned by this API endpoiint"
+    "genericErrorResponse": {
+      "description": "Error message returned as a string",
+      "schema": {
+        "$ref": "#/definitions/GenericError"
+      }
+    },
+    "noContentResponse": {
+      "description": "No content is returned by this API endpoiint on a successful call"
     },
     "productsResponse": {
       "description": "A list of products",
       "schema": {
         "$ref": "#/definitions/Products"
+      }
+    },
+    "validationErrorResponse": {
+      "description": "Validation errors returned as an array of strings",
+      "schema": {
+        "$ref": "#/definitions/ValidationError"
       }
     }
   }

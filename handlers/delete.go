@@ -9,15 +9,15 @@ import (
 )
 
 /*
-tempcode:route DELETE /products/{id} products deleteProduct
-Delete product for a given id.
+swagger:route DELETE /products/{id} products deleteProduct
+Delete product for a given {id}
 
-Deletes a product from the databsae based on id.
+Deletes a product from the database based on {id}.
 
 Responses:
-204: noContent
-404: notFound
-500: internalServerError
+204: noContentResponse
+404: genericErrorResponse
+500: genericErrorResponse
 */
 
 // DeleteProduct is a Handler that receives an id and deletes from the db

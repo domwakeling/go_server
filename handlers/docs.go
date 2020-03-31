@@ -20,41 +20,53 @@ package handlers
 
 import "github.com/domwakeling/go_server/data"
 
-// A list of products
-// swagger:response productsResponse
-type productsResponseWrapper struct {
-	// All products in the system.
+// Following are only used for documentating the API in Swagger
+
+// Error message returned as a string
+// swagger:response genericErrorResponse
+type errorGenericResponseWrapper struct {
+	// Description of the error
 	// in:body
-	Body data.Products	
+	Body GenericError
 }
 
-// No content is returned by this API endpoiint
-// swagger:response noContent
-type productsNoContentWrapper struct {
-}
-
-// Not found (id not present in database)
-// tempcode:response notFound
-type productsNotFoundWrapper struct {
-}
-
-// Validation errors defined as an array of string
-// tempcode:response errorValidation
-type errorValidationWrapper struct {
+// Validation errors returned as an array of strings
+// swagger:response validationErrorResponse
+type errorValidationResponseWrapper struct {
 	// Collection of the errors
 	// in: body
 	Body ValidationError
 }
 
-// Internal server error
-// tempcode:response internalServerError
-type internalErrorWrapper struct {
+// No content is returned by this API endpoiint on a successful call
+// swagger:response noContentResponse
+type responseNoContentWrapper struct {
 }
 
-// tempcode:parameters deleteProduct
-type productIDParameterWrapper struct {
+// A list of products
+// swagger:response productsResponse
+type responseProductsWrapper struct {
+	// All products in the system
+	// in:body
+	Body data.Products	
+}
+
+// swagger:parameters deleteProduct updateProduct
+type parameterIDWrapper struct {
 	// The id of the product to which the operation relates
 	// in: path
 	// required: true
 	ID int `json:"id"`
+}
+
+// swagger:parameters addProduct updateProduct
+type parameterProductWrapper struct {
+	// Product data structure to Add or Update a product.
+	//
+	// Note: the {id} field is not required and will be ignored. New product
+	// will have an {id} generated, updated product will use the {id} passed
+	// in the path.
+	// in:body
+	// required: true
+	Body data.Product
 }
