@@ -18,6 +18,7 @@ Responses:
 
 // GetProducts is a Handler that writes out the current db of Products
 func (p *Products) GetProducts(rw http.ResponseWriter, r *http.Request) {
+	rw.Header().Add("Content-Type", "application/json")
 	prods := data.GetProducts()
 	err := data.ToJSON(prods, rw)
 	if err != nil {
