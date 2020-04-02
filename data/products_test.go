@@ -3,10 +3,11 @@ package data
 import "testing"
 
 func TestChecksValidation(t *testing.T) {
+	v := NewValidation()
 	p := &Product{}
 
 	// should fail on an empty product
-	err := p.Validate()
+	err := v.Validate(p)
 	if err == nil {
 		t.Fatal(err)
 	}
@@ -15,14 +16,14 @@ func TestChecksValidation(t *testing.T) {
 	p.Name = "some name"
 	p.Price = 1.0
 	p.SKU = "abc1234"
-	err = p.Validate()
+	err = v.Validate(p)
 	if err == nil {
 		t.Fatal(err)
 	}
 
 	// should pass with a valid SKU
 	p.SKU = "abc-abcd-ab"
-	err = p.Validate()
+	err = v.Validate(p)
 	if err != nil {
 		t.Fatal(err)
 	}

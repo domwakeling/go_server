@@ -1,15 +1,16 @@
 package handlers
 
 import (
-	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 
 	"github.com/domwakeling/go_server/data"
 )
 
 /*
-swagger:route DELETE /products/{id} products deleteProduct
+swagger:route DELETE /products/{id} Products deleteProduct
 Delete product for a given {id}
 
 Deletes a product from the database based on {id}.
@@ -30,7 +31,7 @@ func (p *Products) DeleteProduct(rw http.ResponseWriter, r *http.Request) {
 	}
 
 	// attempt to handle request ...
-	p.l.Println("Handle DELETE Product on id", id)
+	p.l.Println("[INFO} Handle DELETE Product on id", id)
 	err = data.DeleteProduct(id)
 	// ... writing a StatusNotFound if appropriate error (succesful check but no data) ...
 	if err == data.ErrProductNotFound {

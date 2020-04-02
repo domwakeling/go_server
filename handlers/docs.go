@@ -1,5 +1,5 @@
 /*
-Package classification Product API
+Package handlers Product API
 
 Documentation for coffee shop's Product API. This is a trial for
 completing a microservice using GoLang.
@@ -48,7 +48,7 @@ type responseNoContentWrapper struct {
 type responseProductsWrapper struct {
 	// All products in the system
 	// in:body
-	Body data.Products	
+	Body data.Products
 }
 
 // swagger:parameters deleteProduct updateProduct

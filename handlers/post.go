@@ -7,7 +7,7 @@ import (
 )
 
 /*
-swagger:route POST /products products addProduct
+swagger:route POST /products Products addProduct
 Add a product
 
 Adds a product to the database.
@@ -21,7 +21,7 @@ Responses:
 
 // AddProduct is a Handler that receives data (in the Request.Body) and stores in db
 func (p *Products) AddProduct(rw http.ResponseWriter, r *http.Request) {
-	p.l.Println("Handle POST Product")
+	p.l.Println("[INFO] Handle POST Product")
 
 	// the product to add has been added to request context by middleware; get it out and cast (type assertion)
 	prod := r.Context().Value(KeyProduct{}).(*data.Product)

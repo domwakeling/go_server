@@ -1,15 +1,16 @@
 package handlers
 
 import (
-	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
 
 	"github.com/domwakeling/go_server/data"
 )
 
 /*
-swagger:route PUT /products/{id} products updateProduct
+swagger:route PUT /products/{id} Products updateProduct
 Update a product
 
 Updates product {id} in the database. Will fail if {id} does not exist.
@@ -30,7 +31,7 @@ func (p *Products) UpdateProduct(rw http.ResponseWriter, r *http.Request) {
 		http.Error(rw, "Unable to convert id", http.StatusBadRequest)
 	}
 
-	p.l.Println("Handle PUT Product on id", id)
+	p.l.Println("[INFO] Handle PUT Product on id", id)
 
 	// the product to update has been added to request context by middleware; get it out and cast (type assertion)
 	prod := r.Context().Value(KeyProduct{}).(*data.Product)

@@ -7,7 +7,7 @@ import (
 )
 
 /*
-swagger:route GET /products products listProducts
+swagger:route GET /products Products listProducts
 List all products
 
 Returns a list of all products in the database.
@@ -23,7 +23,7 @@ func (p *Products) GetProducts(rw http.ResponseWriter, r *http.Request) {
 	err := data.ToJSON(prods, rw)
 	if err != nil {
 		// we should never get here, but just in case
-		p.l.Println("[ERROR} serializing product", err)
+		p.l.Println("[ERROR] serializing product", err)
 		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
 		return
 	}
